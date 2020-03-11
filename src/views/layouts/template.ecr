@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width = device-width, initial-scale = 1, maximum-scale = 1">
+
+	<link rel="icon" type="image/png" href="/declaracoes/images/favicon.png">
+
+	<!-- JQUERY -->
+	<script type="text/javascript" src="/declaracoes/js/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- BOOTSTRAP -->
+	<link rel="stylesheet" type="text/css" href="/declaracoes/css/bootstrap/3.3.2/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/declaracoes/css/bootstrap/3.3.2/bootstrap-theme.min.css">
+	<script type="text/javascript" src="/declaracoes/js/bootstrap/3.3.2/bootstrap.min.js"></script>
+
+	<!-- JODIT -->
+	<link rel="stylesheet" type="text/css" href="/declaracoes/css/jodit/3.2.10/jodit.min.css"/>
+	<script type="text/javascript" src="/declaracoes/js/jodit/3.2.10/jodit.min.js"></script>
+
+	<%= yield_content "header" %>
+
+	<title>
+		FATEC Ourinhos
+	</title>
+</head>
+<body>
+	<nav class="navbar navbar-inverse" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand link" href="/declaracoes">
+				<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+				FATEC Ourinhos
+			</a>
+		</div>
+	</nav>
+	<div class="container">
+		<%= yield_content "content" %> <br>
+	</div>
+</body>
+</html>

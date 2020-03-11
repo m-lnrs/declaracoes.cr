@@ -1,0 +1,54 @@
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nova+Mono">
+
+	<link rel="stylesheet" type="text/css" href="http://localhost:8080/academico/resources/css/impressao.css">
+	<link rel="stylesheet" type="text/css" href="http://localhost:8080/academico/resources/css/declaracao.css">
+	<style type="text/css">
+		@page {
+			margin: 0;
+			<%- if orientation == "0" -%>
+			size: 210mm 297mm;
+			<%- else -%>
+			size: 297mm 210mm;
+			<%- end -%>
+		}
+		.page {
+			background-size: 100% 100%;
+			<%- if orientation == "0" -%>
+			background-image: url("http://localhost:8080/academico/resources/imagens/declaracao.svg");
+			<%- else -%>
+			background-image: url("http://localhost:8080/academico/resources/imagens/declaracao_paisagem.svg");
+			<%- end -%>
+		}
+	</style>
+	<title>
+		DECLARACOES
+	</title>
+</head>
+<body>
+<%- declarations.each do |declaration| -%>
+	<div class="page">
+		<div class="container">
+			<div class="header">
+				<%- if header == "1" -%>
+				<img src="http://localhost:8080/academico/resources/imagens/cabecalho.svg" class="logo">
+				<%- end -%>
+			</div>
+			<div class="content">
+				<%= declaration %>
+			</div>
+			<div class="footer text-8">
+				<%- if emission.to_i? -%>
+					Registro: <%= emission %>
+					<% emission = (emission.to_i + 1).to_s %>
+				<%- else -%>
+					<%= emission %>
+				<%- end -%>
+			</div>
+		</div>
+	</div>
+<%- end -%>
+</body>
+</html>

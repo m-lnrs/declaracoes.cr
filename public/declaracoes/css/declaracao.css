@@ -1,0 +1,44 @@
+.logo {
+    width: 170mm;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.header {
+    height: 30mm;
+    text-align: center;
+}
+
+.content {
+    line-height: 150%;
+    padding: 10mm 20mm 0mm 20mm;
+}
+
+.footer {
+    bottom: 0;
+    position: absolute;
+    padding: 0mm 0mm 10mm 0mm;
+}
+
+@media screen {
+    .page {
+        background-size: 100% 100%;
+        background-image: url("../images/declaracao.svg");
+    }
+}
+
+@media print and (orientation:portrait) {
+    .page {
+        background-size: 100% 100%;
+        background-image: url("../images/declaracao.svg");
+    }
+}
+
+@media print and (orientation:landscape) {
+    .page {
+        background-size: 100% 100%;
+        background-image: url("../images/declaracao_paisagem.svg");
+    }
+}

@@ -1,0 +1,20 @@
+<% content_for "content" do %>
+	<div class="page-header">
+		<h1><%= json["pessoa"]["nome"].to_s.upcase %></h1>
+		<h4>CERTIFICADOS DE PARTICIPAÇÃO EM EVENTOS</h4>
+	</div>
+
+	<%- if json["inscricoes"].as_a? -%>
+		<ul class="list-group">
+			<%- json["inscricoes"].as_a.each do |inscricao| -%>
+				<li class="list-group-item">
+					<a href="/declaracoes/inscricao/<%= inscricao["codigo"] %>" target="_blank"><%= inscricao["atividade"]["nome"] %></a>
+				</li>
+			<%- end -%>
+		</ul>
+	<%- else -%>
+		<div class="alert alert-danger">
+			NADA FOI ENCONTRADO
+		</div>
+	<%- end -%>
+<% end %>

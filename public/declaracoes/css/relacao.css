@@ -1,0 +1,28 @@
+.align-right {
+    float: right;
+    line-height: 1;
+}
+
+table {
+    width: 100%;
+    border-color: #000;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 1mm;
+}
+
+.header {
+    margin: 0 0 5mm 0;
+}
+
+.content {
+
+}
+
+.footer {
+    bottom: 0;
+    position: absolute;
+    padding: 0mm 0mm 5mm 0mm;
+}

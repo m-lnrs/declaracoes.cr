@@ -1,0 +1,17 @@
+name: declaracoes
+version: 0.1.0
+
+authors:
+    - m-lib <m-lib@outlook.com>
+
+targets:
+    declaracoes:
+        main: src/declaracoes.cr
+
+dependencies:
+    kemal:
+        github: kemalcr/kemal
+
+crystal: 0.32.1
+
+license: MIT

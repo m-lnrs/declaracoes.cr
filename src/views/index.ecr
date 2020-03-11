@@ -1,0 +1,28 @@
+<% content_for "header" do %>
+<style type="text/css">
+	.form-signin {
+		margin: 0 auto;
+		padding: 15px;
+		max-width: 330px;
+	}
+</style>
+<% end %>
+
+<% content_for "content" do %>
+<form class="form-signin" role="form" action="/declaracoes" method="post">
+	<div class="alert alert-info">
+		DIGITE SEU <strong>CPF</strong> PARA BUSCAR POR SUAS INSCRIÇÕES:
+	</div>
+
+	<div class="form-group">
+		<div class="input-group">
+			<span class="input-group-addon">
+				<span class="glyphicon glyphicon-user"></span>
+			</span>
+			<input type="text" class="form-control" name="CPF" placeholder="CPF" required autofocus/>
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-lg btn-primary btn-block">Buscar</button>
+</form>
+<% end %>

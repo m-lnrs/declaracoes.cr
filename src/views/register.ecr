@@ -1,0 +1,56 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nova+Mono">
+
+	<link rel="stylesheet" type="text/css" href="http://localhost:8080/academico/resources/css/impressao.css">
+	<link rel="stylesheet" type="text/css" href="http://localhost:8080/academico/resources/css/relacao.css">
+
+	<script type="text/javascript" src="http://localhost:8080/academico/resources/js/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			var registro = Number(<%= emission %>);
+			var cabecalho = "<%= title %>";
+			var declaracoes = <%= names %>;
+
+			var table = $("<table>").attr("border", 1).addClass("text-10")
+				.append($("<tr>").attr("bgcolor", "#E8E8E8")
+					.append($("<td>").attr("colspan", 5).attr("align", "center").addClass("cabecalho").text(cabecalho)))
+				.append($("<tr>").attr("bgcolor", "#E8E8E8")
+					.append($("<td>").attr("width", 80).attr("align", "center").text("REGISTRO"))
+					.append($("<td>").attr("width", 250).text("NOME"))
+					.append($("<td>").attr("width", 150).attr("align", "center").text("ASSINATURA"))
+					.append($("<td>").attr("width", 80).attr("align", "center").text("DATA")));
+
+			var container = $(".container").append(table);
+
+			jQuery.each(declaracoes, function(index, declaracao) {
+				var row = $("<tr>")
+					.append($("<td>").attr("width", 80).attr("align", "center").text(registro++))
+					.append($("<td>").attr("width", 250).text(declaracao))
+					.append($("<td>").attr("width", 150))
+					.append($("<td>").attr("width", 80).attr("align", "center").css("white-space", "pre").text("  /  /  "));
+
+				table.append(row);
+
+				if (table.outerHeight() > container.height()) {
+					var page = $("<div>").addClass("page");
+					container = $("<div>").addClass("container");
+
+					table = $("<table>").attr("border", 1).addClass("text-10").append(row);
+					container.append(table);
+					page.append(container);
+
+					$("body").append(page);
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="page">
+		<div class="container"></div>
+	</div>
+</body>
+</html>

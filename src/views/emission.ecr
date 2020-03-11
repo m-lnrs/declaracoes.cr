@@ -1,0 +1,149 @@
+<% content_for "header" do %>
+<style type="text/css">
+	.inline {
+		display: inline;
+	}
+</style>
+
+<script>
+	$(function() {
+		new Jodit("#template");
+		
+		$("#declaration").click(function() {
+			$("#form").attr("action", "emissao/declaracao");
+		});
+		$("#register").click(function() {
+			$("#form").attr("action", "emissao/registro");
+		});
+
+		$("#selecionar").click(function() {
+			$("#file").trigger("click");
+		});
+
+		$("#file").change(function() {
+			$("#fake").val(this.files[0].name);
+		});
+	});
+</script>
+<% end %>
+
+<% content_for "content" do %>
+	<form id="form" action="#" enctype=multipart/form-data method="post" target="_blank">
+		<div class="form-group">
+			<label for="file">ARQUIVO CSV:</label>
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button id="selecionar" type="button" class="btn btn-success">BUSCAR</button>
+				</span>
+				<input id="fake" type="text" class="form-control" placeholder="Nenhum arquivo selecionado" readonly/>
+				<input type="file" id="file" class="form-control" accept=".csv" name="file" style="display: none"></input>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="template">TEMPLATE:</label>
+			<textarea class="form-control" name="text" id="template" rows="5"> <%= text %> </textarea>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label>MODO DE IMPRESSÃO: <span class="asterisco text-danger">*</span></label>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input id="portrait" type="radio" name="orientation" value="0" REQUIRED CHECKED>
+								</span>
+								<label class="form-control" for="portrait"> RETRATO </label>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input id="landscape" type="radio" name="orientation" value="1" REQUIRED>
+								</span>
+								<label class="form-control" for="landscape"> PAISAGEM </label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label>LOGO NO CABEÇALHO? <span class="asterisco text-danger">*</span></label>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input id="yes" type="radio" name="header" value="1" REQUIRED CHECKED>
+								</span>
+								<label class="form-control" for="yes"> SIM </label>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input id="no" type="radio" name="header" value="0" REQUIRED>
+								</span>
+								<label class="form-control" for="no"> NÃO </label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label for="number">NÚMERO DE REGISTRO:</label>
+					<input type="number" class="form-control" name="number" value="1" REQUIRED></input>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label for="title">TITÚLO PARA O LIVRO DE REGISTROS:</label>
+					<input type="text" class="form-control" name="title"></input>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label for="column">COLUNA DO CSV:</label>
+					<input type="text" class="form-control" name="column"></input>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label>CSV COM CABEÇALHO? <span class="asterisco text-danger">*</span></label>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input id="yes" type="radio" name="csv_header" value="true" REQUIRED CHECKED>
+								</span>
+								<label class="form-control" for="yes"> SIM </label>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input id="no" type="radio" name="csv_header" value="false" REQUIRED>
+								</span>
+								<label class="form-control" for="no"> NÃO </label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-6">
+				<button id="declaration" class="btn btn-lg btn-primary btn-block" type="submit">GERAR DECLARAÇÕES</button>
+			</div>
+			<div class="col-sm-6">
+				<button id="register" class="btn btn-lg btn-danger btn-block" type="submit">GERAR REGISTROS</button>
+			</div>
+		</div>
+	</form>
+<% end %>
