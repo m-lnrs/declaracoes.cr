@@ -5,6 +5,7 @@
 
 	<link rel="stylesheet" type="text/css" href="http://localhost:8080/academico/resources/css/impressao.css">
 	<link rel="stylesheet" type="text/css" href="http://localhost:8080/academico/resources/css/declaracao.css">
+
 	<style type="text/css">
 		@page {
 			margin: 0;
@@ -14,11 +15,16 @@
 			size: 297mm 210mm;
 			<%- end -%>
 		}
+
 		.page {
 			background-size: 100% 100%;
 			<%- if orientation == "0" -%>
+			width: 210mm;
+			height: 297mm;
 			background-image: url("http://localhost:8080/academico/resources/imagens/declaracao.svg");
 			<%- else -%>
+			width: 297mm;
+			height: calc(210mm - 1mm); /* it is necessary to remove 1 mm to prevent browser printing a blank page when in landscape mode */
 			background-image: url("http://localhost:8080/academico/resources/imagens/declaracao_paisagem.svg");
 			<%- end -%>
 		}

@@ -3,30 +3,52 @@ require "kemal"
 require "csv"
 
 # Some classes to use with from_json
+# before 1.0.0
+#class Pessoa
+#	JSON.mapping(
+#		nome: String
+#	)
+#end
 class Pessoa
-	JSON.mapping(
-		nome: String
-	)
+	include JSON::Serializable
+	@nome: String
 end
 
+# before 1.0.0
+#class Atividade
+#	JSON.mapping(
+#		nome: String
+#	)
+#end
 class Atividade
-	JSON.mapping(
-		nome: String
-	)
+	include JSON::Serializable
+	@nome: String
 end
 
+# before 1.0.0
+#class Inscricao
+#	JSON.mapping(
+#		atividade: {type: Atividade},
+#		codigo: Int64
+#	)
+#end
 class Inscricao
-	JSON.mapping(
-		atividade: {type: Atividade},
-		codigo: Int64
-	)
+	include JSON::Serializable
+	@atividade: Atividade
+	@codigo: Int64
 end
 
+# before 1.0.0
+#class Search
+#	JSON.mapping(
+#		pessoa: {type: Pessoa},
+#		inscricoes: {type: Array(Inscricao), nilable: true},
+#	)
+#end
 class Search
-	JSON.mapping(
-		pessoa: {type: Pessoa},
-		inscricoes: {type: Array(Inscricao), nilable: true},
-	)
+	include JSON::Serializable
+	@pessoa: Pessoa
+	@inscricoes: Array(Inscricao)
 end
 
 # Include a new function inside Time struct (metaprogramming)
@@ -256,8 +278,11 @@ def send_PDF(env : HTTP::Server::Context, content : String)
 		file.print(content)
 	end
 
-	parameters = ["--headless", "--disable-gpu", "--run-all-compositor-stages-before-draw", "--print-to-pdf", "--no-margins", "#{source.path}"]
-	process = Process.new("chromium-browser", parameters, output: Process::Redirect::Pipe)
+	#https://download-chromium.appspot.com
+	#parameters = ["--headless", "--disable-gpu", "--run-all-compositor-stages-before-draw", "--virtual-time-budget=10000", "--print-to-pdf-no-header", "--print-to-pdf", "--no-margins", "#{source.path}"]
+	#process = Process.new("chromium-browser", parameters, output: Process::Redirect::Pipe)
+	parameters = ["#{source.path}", "OUTPUT.PDF"]
+	process = Process.new("weasyprint", parameters, output: Process::Redirect::Pipe)
 
 	process.wait.success?
 
@@ -265,10 +290,10 @@ def send_PDF(env : HTTP::Server::Context, content : String)
 	source.delete
 
 	# Send the generated PDF to the user
-	send_file env, "output.pdf"
+	send_file env, "OUTPUT.PDF"
 
 	# Delete the PDF after send it to the user
-	`rm output.pdf`
+	`rm OUTPUT.PDF`
 end
 
 Kemal.run ARGV[0]?.try &.to_i?
